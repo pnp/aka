@@ -12,6 +12,9 @@ on:
 permissions:
   contents: read
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -30,10 +33,6 @@ jobs:
         with:
           node-version: 24
 
-      - name: Set up Pages
-        id: pages
-        uses: actions/configure-pages@v5
-
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3.2.0
         with:
@@ -43,7 +42,7 @@ jobs:
       - name: Build
         run: |
           node scripts/prepare-redirects.mjs
-          hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+          hugo --gc --minify --baseURL "https://pnp.github.io/aka/"
 
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'

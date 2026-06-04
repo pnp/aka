@@ -28,6 +28,8 @@ Every redirect page automatically renders this telemetry image before redirectin
 
 GitHub Actions builds pull requests for validation. Pushes to `main`, including merged pull requests, build and deploy the Hugo site to GitHub Pages at `https://pnp.github.io/aka/`.
 
+Before the first deployment, a repository admin must enable Pages for this repo and set the build source to GitHub Actions in Settings > Pages.
+
 Run a local build with:
 
 ```shell
