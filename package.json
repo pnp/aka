@@ -1,0 +1,8 @@
+{
+  "name": "@pnp/aka",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/prepare-redirects.mjs && hugo --gc --minify",
+    "build:local": "node scripts/prepare-redirects.mjs && hugo --destination public --cleanDestinationDir"
+  }
+}

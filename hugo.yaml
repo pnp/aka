@@ -1,0 +1,15 @@
+baseURL: https://pnp.github.io/aka/
+languageCode: en-us
+title: PnP Aka
+contentDir: .generated-content
+
+disableKinds:
+  - RSS
+  - sitemap
+  - taxonomy
+  - term
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

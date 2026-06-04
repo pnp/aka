@@ -1,0 +1,48 @@
+{{- $target := .Params.redirect_url -}}
+{{- if not $target -}}
+  {{- errorf "Missing required generated 'redirect_url' front matter in %s" .File.Path -}}
+{{- end -}}
+{{- $parsedTarget := urls.Parse $target -}}
+{{- if not $parsedTarget.Scheme -}}
+  {{- $target = printf "https://%s" $target -}}
+{{- end -}}
+{{- $slug := .Params.source_slug | default .File.TranslationBaseName | urlize -}}
+{{- $telemetryUrl := printf "https://pnptelemetry.azurewebsites.net/pnp.github.io/aka/%s" $slug -}}
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="1;url={{ $target }}">
+  <link rel="canonical" href="{{ $target }}">
+  <title>Redirecting to {{ $target }}</title>
+</head>
+<body style='font-family: "Segoe UI", "Segoe Sans", sans-serif;'>
+  <img id="telemetry" src="{{ $telemetryUrl }}" alt="">
+  <p><a href="{{ $target }}">Continue to link</a></p>
+  <script>
+    const target = {{ $target | jsonify | safeJS }};
+    const image = document.getElementById("telemetry");
+    let redirected = false;
+
+    function redirect() {
+      if (redirected) {
+        return;
+      }
+
+      redirected = true;
+      window.location.replace(target);
+    }
+
+    if (image && image.complete) {
+      setTimeout(redirect, 0);
+    } else if (image) {
+      image.addEventListener("load", redirect, { once: true });
+      image.addEventListener("error", redirect, { once: true });
+      setTimeout(redirect, 1000);
+    } else {
+      redirect();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+public/
+public-test/
+resources/
+.generated-content/
+.hugo_build.lock
