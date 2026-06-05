@@ -1,4 +1,4 @@
-baseURL: https://pnp.github.io/aka/
+baseURL: https://pnp.ms/
 languageCode: en-us
 title: PnP Aka
 contentDir: .generated-content
