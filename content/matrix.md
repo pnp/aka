@@ -1,3 +1,3 @@
 ---
-url: "https://learn.microsoft.com/en-us/sharepoint/dev/spfx/compatibility"
+url: "https://learn.microsoft.com/sharepoint/dev/spfx/compatibility"
 ---
