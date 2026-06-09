@@ -57,6 +57,15 @@ If you have contributor access to this repo, you can submit a PR. As long as you
 
 Please, for the love of all that is holy, keep your URLs short.
 
+## So... do I use an AKA.ms or a PNP.ms link?
+
+Well, we're not the link police... but what we suggest:
+
+- If it is a Microsoft initiative, use aka.ms
+- If it is a PnP initiative, use pnp.ms
+- If it is a community initiative, supported by PnP, use pnp.ms
+
+
 ## What, no home page?
 
 Nope. `https://pnp.ms/` redirects to `https://pnp.github.io/` which is our main documentation hub. We don't want to create confusion about the purpose of this site by having a home page with content. The only content on this site should be the redirects.
