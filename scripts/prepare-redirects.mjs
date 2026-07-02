@@ -4,6 +4,7 @@ import path from "node:path";
 const repoRoot = process.cwd();
 const sourceDir = path.join(repoRoot, "content");
 const outputDir = path.join(repoRoot, ".generated-content");
+const redirectPagesDir = path.join(outputDir, "redirect-pages");
 
 async function findMarkdownFiles(dir) {
   let entries;
@@ -60,8 +61,26 @@ function readUrl(frontMatter, filePath) {
   return url;
 }
 
+function getSlugParts(relativeParts) {
+  const sourceFileName = relativeParts[relativeParts.length - 1];
+  const sourceBaseName = path.basename(sourceFileName, path.extname(sourceFileName));
+
+  if (sourceBaseName.toLowerCase() === "index") {
+    return relativeParts.slice(0, -1);
+  }
+
+  return [
+    ...relativeParts.slice(0, -1),
+    sourceBaseName
+  ];
+}
+
+function getGeneratedFileName(slug) {
+  return `${Buffer.from(slug, "utf8").toString("base64url")}.md`;
+}
+
 await rm(outputDir, { recursive: true, force: true });
-await mkdir(outputDir, { recursive: true });
+await mkdir(redirectPagesDir, { recursive: true });
 
 const sourceFiles = await findMarkdownFiles(sourceDir);
 const slugs = new Set();
@@ -75,10 +94,7 @@ for (const sourceFile of sourceFiles) {
     continue;
   }
 
-  const slugParts = [
-    ...relativeParts.slice(0, -1),
-    path.basename(sourceFileName, path.extname(sourceFileName))
-  ];
+  const slugParts = getSlugParts(relativeParts);
   const slug = slugParts.join("/");
   const slugKey = slug.toLowerCase();
 
@@ -94,14 +110,14 @@ for (const sourceFile of sourceFiles) {
   const generatedMarkdown = [
     "---",
     `title: ${JSON.stringify(slug)}`,
+    `url: ${JSON.stringify(`/${slug}/`)}`,
     `redirect_url: ${JSON.stringify(url)}`,
     `source_slug: ${JSON.stringify(slug)}`,
     "---",
     ""
   ].join("\n");
 
-  const outputFile = path.join(outputDir, ...slugParts.slice(0, -1), `${slugParts[slugParts.length - 1]}.md`);
-  await mkdir(path.dirname(outputFile), { recursive: true });
+  const outputFile = path.join(redirectPagesDir, getGeneratedFileName(slug));
   await writeFile(outputFile, generatedMarkdown, "utf8");
 }
 

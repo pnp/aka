@@ -25,6 +25,8 @@ url: "https://learn.microsoft.com/sharepoint/dev/spfx/compatibility"
 
 Nested files create nested short paths. For example, `content/t/hugo.md` creates `https://pnp.ms/t/hugo/`.
 
+You can also create a short path and nested short paths with the same prefix. For example, use `content/pnpcore.md` for `https://pnp.ms/pnpcore/` and `content/pnpcore/log.md` for `https://pnp.ms/pnpcore/log/`.
+
 If the URL does not include a scheme, the site redirects to `https://`.
 
 Query parameters on the short link are appended to the destination. For example, `https://pnp.ms/webparts/?q=hugo` redirects to `https://pnp.github.io/sp-dev-fx-webparts/?q=hugo`.
