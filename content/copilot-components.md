@@ -1,3 +1,3 @@
 ---
-url: https://github.com/pnp/spfx-copilot-components
---- 
+url: https://pnp.github.io/spfx-copilot-components/
+---
