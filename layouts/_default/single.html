@@ -10,7 +10,7 @@
 {{- with .Params.source_slug -}}
   {{- $slug = . -}}
 {{- end -}}
-{{- $telemetryUrl := printf "https://pnptelemetry.azurewebsites.net/pnp.github.io/aka/%s" $slug -}}
+{{- $telemetryUrl := printf "https://m365-visitor-stats.azurewebsites.net/pnp.github.io/aka/%s" $slug -}}
 <!doctype html>
 <html lang="{{ site.Language.LanguageCode }}">
 <head>

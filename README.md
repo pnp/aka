@@ -36,7 +36,7 @@ The `url` field is intentionally used only as the redirect destination. A prebui
 Every redirect page automatically renders this telemetry image before redirecting:
 
 ```html
-<img src="https://pnptelemetry.azurewebsites.net/pnp.github.io/aka/[slug]" alt="">
+<img src="https://m365-visitor-stats.azurewebsites.net/pnp.github.io/aka/[slug]" alt="">
 ```
 
 ## Deployment
